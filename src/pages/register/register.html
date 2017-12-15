@@ -33,15 +33,15 @@
 
     <ion-item>
       <ion-label stacked>确认密码</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="confirmPassword"></ion-input>
     </ion-item>
   </ion-list>
 
   <div padding>
-    <button ion-button color="primary" block >注册</button>
+    <button ion-button color="primary" block (click)="doRegister()">注册</button>
   </div>
   <div padding text-center>
-    <button ion-button color="primary" outline >已有账号？登陆</button>
+    <button ion-button color="primary" outline (click)="goToLogin()" >已有账号？登陆</button>
   </div>
 
 </ion-content>

@@ -28,8 +28,16 @@ export class RestProvider {
   private apiUrlGetQuestion = "https://imoocqa.gugujiankong.com/api/question/get";
   private apiUrlAnswer = "https://imoocqa.gugujiankong.com/api/question/answer";
 
+  /**
+   * 密码的传递需要加密之后再传输，并且服务器端也需要相应的处理
+   * @param http
+   */
   constructor(public http: Http) {
     console.log('Hello RestProvider Provider');
+  }
+
+  register(mobile,nickName,password):Observable<string[]>{
+    return this.getUrlReturn(this.apiUrlRegister + "?mobile=" + mobile + "&nickname=" + nickName + "&password=" + password);
   }
 
   login(mobile,password):Observable<string[]>{
