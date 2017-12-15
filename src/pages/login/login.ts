@@ -6,6 +6,7 @@ import {
 import {BaseUI} from "../../common/baseui";
 import {RestProvider} from "../../providers/rest/rest";
 import {Storage} from "@ionic/storage";
+import {RegisterPage} from "../register/register";
 
 /**
  * Generated class for the LoginPage page.
@@ -48,7 +49,7 @@ export class LoginPage extends BaseUI {
           //处理登陆成功的页面跳转
           this.storage.set('UserId',f["UserId"]);
           loading.dismiss();
-          this.viewCtrl.dismiss();//把登陆页面dissmiss掉
+          this.dismiss();//把登陆页面dissmiss掉
 
         }else{
           loading.dismiss();
@@ -56,6 +57,10 @@ export class LoginPage extends BaseUI {
         }
     },
     error=>this.errorMessage = <any>error);
+  }
+
+  pushRegisterPage(){
+    this.navCtrl.push(RegisterPage);
   }
 
   dismiss() {

@@ -17,6 +17,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest/rest';
 import {LoginPage} from "../pages/login/login";
+import {RegisterPage} from "../pages/register/register";
 
 @NgModule({
   declarations: [
@@ -27,13 +28,16 @@ import {LoginPage} from "../pages/login/login";
     NotificationPage,
     MorePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   imports: [
-    HttpModule,
+    HttpModule,//全局需要导入http
     BrowserModule,
-    IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicModule.forRoot(MyApp,{
+      backButtonText:'返回'
+    }),
+    IonicStorageModule.forRoot() //全局定义storage模块
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -44,13 +48,14 @@ import {LoginPage} from "../pages/login/login";
     NotificationPage,
     MorePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RestProvider
+    RestProvider   //rest的定义导入
   ]
 })
 export class AppModule {}
