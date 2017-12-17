@@ -7,6 +7,7 @@ import {BaseUI} from "../../common/baseui";
 import {RestProvider} from "../../providers/rest/rest";
 import {Storage} from "@ionic/storage";
 import {RegisterPage} from "../register/register";
+import {NotificationPage} from "../notification/notification";
 
 /**
  * Generated class for the LoginPage page.
@@ -50,7 +51,6 @@ export class LoginPage extends BaseUI {
           this.storage.set('UserId',f["UserId"]);
           loading.dismiss();
           this.dismiss();//把登陆页面dissmiss掉
-
         }else{
           loading.dismiss();
           super.showToast(this.toastCtrl,f["StatusContent"]);

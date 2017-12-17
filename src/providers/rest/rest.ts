@@ -1,15 +1,15 @@
-import { Observable } from 'rxjs/Rx';
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import {Observable} from 'rxjs/Rx';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 /*
-  Generated class for the RestProvider provider.
+ Generated class for the RestProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
+ See https://angular.io/guide/dependency-injection for more info on providers
+ and Angular DI.
+ */
 
 @Injectable()
 export class RestProvider {
@@ -36,12 +36,16 @@ export class RestProvider {
     console.log('Hello RestProvider Provider');
   }
 
-  register(mobile,nickName,password):Observable<string[]>{
+  register(mobile, nickName, password): Observable<string[]> {
     return this.getUrlReturn(this.apiUrlRegister + "?mobile=" + mobile + "&nickname=" + nickName + "&password=" + password);
   }
 
-  login(mobile,password):Observable<string[]>{
+  login(mobile, password): Observable<string[]> {
     return this.getUrlReturn(this.apiUrlLogin + "?mobile=" + mobile + "&password=" + password);
+  }
+
+  getUserInfo(userId): Observable<string[]> {
+    return this.getUrlReturn(this.apiUrlUserInfo + "?userId=" + userId);
   }
 
   /**

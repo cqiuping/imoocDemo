@@ -1,7 +1,12 @@
 import {Component} from '@angular/core';
-import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
+import {
+  IonicPage, LoadingController, ModalController, NavController,
+  NavParams
+} from 'ionic-angular';
 import {LoginPage} from "../login/login";
 import {Storage} from "@ionic/storage";
+import {BaseUI} from "../../common/baseui";
+import {RestProvider} from "../../providers/rest/rest";
 
 /**
  * Generated class for the MorePage page.
@@ -15,14 +20,20 @@ import {Storage} from "@ionic/storage";
   selector: 'page-more',
   templateUrl: 'more.html',
 })
-export class MorePage {
+export class MorePage extends BaseUI {
   public notLogin: boolean = true;
   public logined: boolean = false;
+  public userInfo:string[];
+  public headface;
+
 
   constructor(public modalCtrl: ModalController,
               public navCtrl: NavController,
               public navParams: NavParams,
-              public storage: Storage) {
+              public storage: Storage,
+              public loadingCtrl: LoadingController,
+              public rest: RestProvider) {
+    super();
   }
 
   showModal() {
@@ -36,17 +47,23 @@ export class MorePage {
 
   loadUserPage() {
     this.storage.get("UserId").then((val) => {
-      console.log("yes");
       if (val != null) {
-        console.log(val);
-        this.logined = true;
-        this.notLogin = false;
+        //加载用户数据
+        let loading = super.showLoading(this.loadingCtrl, "加载中....");
+        this.rest.getUserInfo(val)
+          .subscribe(
+            userInfo=>{
+              this.userInfo = userInfo;
+              this.headface = userInfo["UserHeadface"] + (new Date()).valueOf();
+              this.logined = true;
+              this.notLogin = false;
+              loading.dismiss();
+            }
+          )
       } else {
         this.logined = false;
         this.notLogin = true;
       }
     });
   }
-
-
 }
