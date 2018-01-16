@@ -18,6 +18,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest/rest';
 import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
+import {UserPage} from "../pages/user/user";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {RegisterPage} from "../pages/register/register";
     MorePage,
     TabsPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    UserPage
   ],
   imports: [
     HttpModule,//全局需要导入http
@@ -49,7 +51,8 @@ import {RegisterPage} from "../pages/register/register";
     MorePage,
     TabsPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    UserPage
   ],
   providers: [
     StatusBar,

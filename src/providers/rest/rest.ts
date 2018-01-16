@@ -48,6 +48,11 @@ export class RestProvider {
     return this.getUrlReturn(this.apiUrlUserInfo + "?userId=" + userId);
   }
 
+  updateNickName(userId,nickName):Observable<string[]>{
+    return this.getUrlReturn(this.apiUrlUpdateNickName+"?userid=" + userId + "&nickname=" + nickName);
+  }
+
+
   /**
    * 全局获取 HTTP 请求的方法
    * @Parry
