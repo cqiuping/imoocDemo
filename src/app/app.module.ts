@@ -19,6 +19,7 @@ import { RestProvider } from '../providers/rest/rest';
 import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
 import {UserPage} from "../pages/user/user";
+import {HeadfacePage} from "../pages/headface/headface";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {UserPage} from "../pages/user/user";
     TabsPage,
     LoginPage,
     RegisterPage,
-    UserPage
+    UserPage,
+    HeadfacePage
   ],
   imports: [
     HttpModule,//全局需要导入http
@@ -52,7 +54,8 @@ import {UserPage} from "../pages/user/user";
     TabsPage,
     LoginPage,
     RegisterPage,
-    UserPage
+    UserPage,
+    HeadfacePage
   ],
   providers: [
     StatusBar,

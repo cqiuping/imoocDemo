@@ -43,20 +43,22 @@ export class LoginPage extends BaseUI {
 
   login() {
     var loading = super.showLoading(this.loadingCtrl, "登陆中...");
-    this.rest.login(this.mobile, this.password)
-    .subscribe(
-      f=>{
-        if(f["Status"] == "OK"){
-          //处理登陆成功的页面跳转
-          this.storage.set('UserId',f["UserId"]);
-          loading.dismiss();
-          this.dismiss();//把登陆页面dissmiss掉
-        }else{
-          loading.dismiss();
-          super.showToast(this.toastCtrl,f["StatusContent"]);
-        }
-    },
-    error=>this.errorMessage = <any>error);
+    loading.present().then(() =>{
+      this.rest.login(this.mobile, this.password)
+      .subscribe(
+        f=>{
+          if(f["Status"] == "OK"){
+            //处理登陆成功的页面跳转
+            this.storage.set('UserId',f["UserId"]);
+            loading.dismiss();
+            this.dismiss();//把登陆页面dissmiss掉
+          }else{
+            loading.dismiss();
+            super.showToast(this.toastCtrl,f["StatusContent"]);
+          }
+        },
+        error=>this.errorMessage = <any>error);
+    })
   }
 
   pushRegisterPage(){

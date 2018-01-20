@@ -53,19 +53,21 @@ export class RegisterPage extends BaseUI {
       super.showToast(this.toastCtrl, "两次的密码不匹配");
     } else {
       let loading = super.showLoading(this.loadingCtrl, "注册中...");
-      this.rest.register(this.mobile, this.nickName, this.password)
-      .subscribe(
-        f => {
-          if (f["Status"] == "OK") {
-            loading.dismiss();
-            super.showToast(this.toastCtrl, "注册成功啦!");
-            this.dismiss();
-          } else {
-            loading.dismiss();
-            super.showToast(this.toastCtrl, f["StatusContent"]);
-          }
-        },
-        error => this.errorMessage = <any>error);
+      loading.present().then(()=>{
+        this.rest.register(this.mobile, this.nickName, this.password)
+        .subscribe(
+          f => {
+            if (f["Status"] == "OK") {
+              loading.dismiss();
+              super.showToast(this.toastCtrl, "注册成功啦!");
+              this.dismiss();
+            } else {
+              loading.dismiss();
+              super.showToast(this.toastCtrl, f["StatusContent"]);
+            }
+          },
+          error => this.errorMessage = <any>error);
+      })
     }
 
   }

@@ -40,6 +40,9 @@ export class MorePage extends BaseUI {
   showModal() {
     console.log("showModal");
     let modal = this.modalCtrl.create(LoginPage);
+    modal.onDidDismiss(()=>{
+      this.loadUserPage();
+    })
     modal.present();
   }
 
@@ -56,7 +59,8 @@ export class MorePage extends BaseUI {
       if (val != null) {
         //加载用户数据
         let loading = super.showLoading(this.loadingCtrl, "加载中....");
-        this.rest.getUserInfo(val)
+        loading.present().then(()=>{
+          this.rest.getUserInfo(val)
           .subscribe(
             userInfo=>{
               this.userInfo = userInfo;
@@ -64,8 +68,10 @@ export class MorePage extends BaseUI {
               this.logined = true;
               this.notLogin = false;
               loading.dismiss();
-            }
+            },
           )
+        })
+
       } else {
         this.logined = false;
         this.notLogin = true;

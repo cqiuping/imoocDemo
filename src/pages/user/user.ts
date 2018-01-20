@@ -1,8 +1,12 @@
 import {Component} from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {
+  IonicPage, LoadingController, ModalController, NavController, NavParams, ToastController,
+  ViewController
+} from 'ionic-angular';
 import {Storage} from "@ionic/storage";
 import {BaseUI} from "../../common/baseui";
 import {RestProvider} from "../../providers/rest/rest";
+import {HeadfacePage} from "../headface/headface";
 
 /**
  * Generated class for the UserPage page.
@@ -28,6 +32,7 @@ export class UserPage extends BaseUI {
               public rest: RestProvider,
               private loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
+              private viewCtrl: ViewController,
               public navParams: NavParams) {
     super();
   }
@@ -41,7 +46,8 @@ export class UserPage extends BaseUI {
     this.storage.get("UserId").then(val => {
       if (val != null) {
         let loading = super.showLoading(this.loadingCtrl,"修改中...");
-        this.rest.updateNickName(val, this.nickName)
+        loading.present().then(() =>{
+          this.rest.updateNickName(val, this.nickName)
           .subscribe(
             f => {
               if (f["Status"] == "OK") {
@@ -55,26 +61,38 @@ export class UserPage extends BaseUI {
             },
             err=>{this.errorMessage = <any>err;}
           )
+        })
       }
     })
   }
 
-  private loadUserPage() {
+  logout(){
+    this.storage.remove('UserId');
+    this.viewCtrl.dismiss();
+  }
 
+  gotoHeadface(){
+    this.navCtrl.push(HeadfacePage);
+  }
+
+  private loadUserPage() {
     this.storage.get("UserId").then((val) => {
       if (val != null) {
         let loading = super.showLoading(this.loadingCtrl,"加载中...");
-        //加载用户数据
-        this.rest.getUserInfo(val)
-          .subscribe(
-            userInfo => {
-              loading.dismiss();
-              this.userInfo = userInfo;
-              this.headface = userInfo["UserHeadface"] + (new Date()).valueOf();
-              this.nickName = userInfo["UserNickName"];
-            },
-            err => this.errorMessage = <any>err
-          )
+        loading.present().then(()=>{
+         //加载用户数据
+         this.rest.getUserInfo(val)
+         .subscribe(
+           userInfo => {
+             loading.dismiss();
+             this.userInfo = userInfo;
+             this.headface = userInfo["UserHeadface"] + (new Date()).valueOf();
+             this.nickName = userInfo["UserNickName"];
+           },
+           err => this.errorMessage = <any>err
+         )
+        })
+
       }
     });
   }

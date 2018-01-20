@@ -20,7 +20,6 @@ export abstract class BaseUI {
       duration: 3000,
       dismissOnPageChange: true //页面变化的时候自动关闭loading
     });
-    loader.present();
     return loader;
   }
 
