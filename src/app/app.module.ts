@@ -20,6 +20,10 @@ import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
 import {UserPage} from "../pages/user/user";
 import {HeadfacePage} from "../pages/headface/headface";
+import {Camera} from "@ionic-native/camera";
+import {FilePath} from "@ionic-native/file-path";
+import {File} from "@ionic-native/file";
+import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
 
 @NgModule({
   declarations: [
@@ -60,6 +64,11 @@ import {HeadfacePage} from "../pages/headface/headface";
   providers: [
     StatusBar,
     SplashScreen,
+    File,
+    Camera,
+    FilePath,
+    FileTransfer,
+    FileTransferObject,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestProvider   //rest的定义导入
   ]
