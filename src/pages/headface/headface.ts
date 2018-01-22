@@ -6,9 +6,9 @@ import {
 import {BaseUI} from "../../common/baseui";
 import {Storage} from "@ionic/storage";
 import {Camera} from "@ionic-native/camera";
-import {FilePath} from "@ionic-native/file-path";
 import {File} from "@ionic-native/file";
 import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
+import {FilePath} from "@ionic-native/file-path";
 
 declare var cordova;//导入第三方库，导入ts中
 
@@ -56,7 +56,7 @@ export class HeadfacePage extends BaseUI {
    * 获取图片
    */
   getPicture(sourceType) {
-    alert("getPicture");
+    // alert("getPicture");
     let options = {
       quality: 100, //图片的质量
       destinationType: sourceType,
@@ -81,7 +81,7 @@ export class HeadfacePage extends BaseUI {
         this.copyFileToLocalDir(correctPath,currentName,this.createFileName());
       }
     },(error) =>{
-      alert(error);
+      // alert(error);
       super.showToast(this.toastCtrl,"获取图片有误，请检查设备")})
   }
 
@@ -97,9 +97,11 @@ export class HeadfacePage extends BaseUI {
       isSuccess =>{
         this.lastPicture = newFileName;
       },error => {
+        console.log("errorMessage:" + error.message);
         super.showToast(this.toastCtrl,"存储图片到本地图库错误");
       });
   }
+
 
   /**
    * 为文件生成新的文件名

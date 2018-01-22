@@ -21,9 +21,11 @@ import {RegisterPage} from "../pages/register/register";
 import {UserPage} from "../pages/user/user";
 import {HeadfacePage} from "../pages/headface/headface";
 import {Camera} from "@ionic-native/camera";
-import {FilePath} from "@ionic-native/file-path";
 import {File} from "@ionic-native/file";
 import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
+import {FilePath} from "@ionic-native/file-path";
+import {QuestionPage} from "../pages/question/question";
+import {DetailsPage} from "../pages/details/details";
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
     LoginPage,
     RegisterPage,
     UserPage,
-    HeadfacePage
+    HeadfacePage,
+    QuestionPage,
+    DetailsPage
   ],
   imports: [
     HttpModule,//全局需要导入http
@@ -59,14 +63,16 @@ import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
     LoginPage,
     RegisterPage,
     UserPage,
-    HeadfacePage
+    HeadfacePage,
+    QuestionPage,
+    DetailsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     File,
-    Camera,
     FilePath,
+    Camera,
     FileTransfer,
     FileTransferObject,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
