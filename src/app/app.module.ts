@@ -28,6 +28,8 @@ import {QuestionPage} from "../pages/question/question";
 import {DetailsPage} from "../pages/details/details";
 import {AnswerPage} from "../pages/answer/answer";
 import {ChatDetailPage} from "../pages/chat-detail/chat-detail";
+import { EmojiProvider } from '../providers/emoji/emoji';
+import {ComponentsModule} from "../components/components.module";
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import {ChatDetailPage} from "../pages/chat-detail/chat-detail";
     IonicModule.forRoot(MyApp,{
       backButtonText:'返回'
     }),
+    ComponentsModule,
     IonicStorageModule.forRoot() //全局定义storage模块
   ],
   bootstrap: [IonicApp],
@@ -81,8 +84,10 @@ import {ChatDetailPage} from "../pages/chat-detail/chat-detail";
     Camera,
     FileTransfer,
     FileTransferObject,
+    EmojiProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    RestProvider   //rest的定义导入
+    RestProvider,
+    EmojiProvider   //rest的定义导入
   ]
 })
 export class AppModule {}

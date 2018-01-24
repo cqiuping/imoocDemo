@@ -16,13 +16,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ChatDetailPage {
 
   chatUsername:string;
+  isSelectedEmoji:boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.chatUsername = navParams.get("username");
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatDetailPage');
+  selectedEmoji(){
+    this.isSelectedEmoji = !this.isSelectedEmoji;
   }
+
 
 }
