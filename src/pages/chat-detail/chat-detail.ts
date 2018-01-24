@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {ChatDetailPage} from "../chat-detail/chat-detail";
 
 /**
- * Generated class for the ChatPage page.
+ * Generated class for the ChatDetailPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,17 +10,19 @@ import {ChatDetailPage} from "../chat-detail/chat-detail";
 
 @IonicPage()
 @Component({
-  selector: 'page-chat',
-  templateUrl: 'chat.html',
+  selector: 'page-chat-detail',
+  templateUrl: 'chat-detail.html',
 })
-export class ChatPage {
-userinfo:Object;
-ChatDetailPage:any;
+export class ChatDetailPage {
+
+  chatUsername:string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.userinfo={
-      userid: '123321',
-      username: 'Vivien'
-    }
-    this.ChatDetailPage = ChatDetailPage;
+    this.chatUsername = navParams.get("username");
   }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ChatDetailPage');
+  }
+
 }

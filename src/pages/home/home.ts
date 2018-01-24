@@ -33,6 +33,17 @@ export class HomePage extends BaseUI{
   }
 
   /**
+   * 下拉刷新
+   * @param event
+   */
+  doRefresh(event){
+    setTimeout(() => {
+      this.getFeeds();
+      event.complete();
+    }, 2000);
+  }
+
+  /**
    * 进入问答页面
    */
   gotoQuestion(){
@@ -61,11 +72,11 @@ export class HomePage extends BaseUI{
     loading.present().then(()=>{
       that.rest.getFeeds().subscribe(
         f=>{
+          // loading.dismiss();
           this.feeds = f;
-          loading.dismiss();
         },
         error =>{
-          loading.dismiss();
+          // loading.dismiss();
           this.errorMessage = <any>error;
         }
       )

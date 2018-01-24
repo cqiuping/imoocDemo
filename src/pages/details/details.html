@@ -18,8 +18,12 @@
     <ion-card-content>
       {{question?.Content}}
       <p>{{question?.LikeCount}}&nbsp;个关注&nbsp;&nbsp;&nbsp;{{question?.CommentCount}}&nbsp;个回答</p>
-      <button ion-button smallv [disbaled]="isMyQuestion"><ion-icon name="add"></ion-icon>&nbsp;回答</button>
-      <button ion-button small color="secondary"><ion-icon name="add" (click)="saveFavorite()"></ion-icon>&nbsp;{{isFavorite ? '取消关注':'关注'}}</button>&nbsp;
+      <button ion-button smallv [disabled]="isMyQuestion" (click)="showAnswer()">
+        <ion-icon name="add"></ion-icon>&nbsp;回答
+      </button>
+      <button ion-button small color="secondary" (click)="saveFavorite()">
+        <ion-icon name="add"></ion-icon>&nbsp;{{isFavorite ? '取消关注':'关注'}}
+      </button>&nbsp;
     </ion-card-content>
   </ion-card>
 

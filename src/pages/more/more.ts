@@ -67,7 +67,7 @@ export class MorePage extends BaseUI {
               this.headface = userInfo["UserHeadface"] + (new Date()).valueOf();
               this.logined = true;
               this.notLogin = false;
-              loading.dismiss();
+              // loading.dismiss();
             },
           )
         })

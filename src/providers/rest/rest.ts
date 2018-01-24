@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import {Loading} from "ionic-angular";
 
 /*
  Generated class for the RestProvider provider.
@@ -86,6 +87,16 @@ export class RestProvider {
     return this.getUrlReturn(this.apiUrlSaveFavourite + "?questionid=" + questionId + "&userid=" + userId);
   }
 
+  /**
+   * 提交回答
+   * @param userId
+   * @param questionId
+   * @param content
+   */
+  submitAnswer(userId,questionId,content):Observable<string[]>{
+      return this.getUrlReturn(this.apiUrlAnswer + "?userid=" + userId + "&questionid=" + questionId + "&content=" + content);
+  }
+
 
   /**
    * 请求首页的feeds流
@@ -93,6 +104,24 @@ export class RestProvider {
    */
   getFeeds(): Observable<string[]> {
     return this.getUrlReturn(this.apiUrlFeeds);
+  }
+
+  /**
+   * dismissLoading
+   */
+  dissmissLoading(loading:Loading){
+    if(loading){
+      loading.dismiss();
+      loading=null;
+    }
+  }
+
+  /**
+   * 获取问题列表
+   * @returns {Observable<string[]>}
+   */
+  getQuestions():Observable<string[]> {
+    return this.getUrlReturn(this.apiUrlQuestionList);
   }
 
 

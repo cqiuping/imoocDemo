@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
 import {
-  IonicPage, LoadingController, NavController, NavParams,
+  IonicPage, LoadingController, ModalController, NavController, NavParams,
   ToastController
 } from 'ionic-angular';
 import {BaseUI} from "../../common/baseui";
 import {RestProvider} from "../../providers/rest/rest";
 import {Storage} from "@ionic/storage";
+import {AnswerPage} from "../answer/answer";
 
 /**
  * Generated class for the DetailsPage page.
@@ -14,7 +15,6 @@ import {Storage} from "@ionic/storage";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-details',
   templateUrl: 'details.html',
@@ -31,6 +31,7 @@ export class DetailsPage extends BaseUI {
   constructor(public navCtrl: NavController,
               private loadingCtrl: LoadingController,
               private rest: RestProvider,
+              private modalCtrl:ModalController,
               private toastCtrl:ToastController,
               private storage:Storage,
               public navParams: NavParams) {
@@ -42,13 +43,26 @@ export class DetailsPage extends BaseUI {
     this.loadQuestion(this.id);
   }
 
+  /**
+   * 跳转到回答页面
+   */
+  showAnswer(){
+    let modal = this.modalCtrl.create(AnswerPage,{id:this.id});
+    modal.present();
+    modal.onDidDismiss(()=>{
+      this.loadQuestion(this.id);
+    })
+  }
+
+  /**
+   * 关注逻辑
+   */
   saveFavorite(){
     this.rest.saveFavorite(this.id, this.userId).subscribe(
       f=>{
         if(f["Status"] == "OK" ){
           super.showToast(this.toastCtrl,this.isFavorite?"取消关注成功":"关注成功");
           this.isFavorite = !this.isFavorite;
-          this.isMyQuestion = (f["OwnUserId"] == this.userId);
         }
       },error=>{
         console.log(error.message);
@@ -65,11 +79,13 @@ export class DetailsPage extends BaseUI {
         loading.present().then(() => {
           this.rest.getQuestionWithUser(id,this.userId).subscribe(
             f => {
+              // this.rest.dissmissLoading(loading);
               this.question = f;
               this.answers = f["Answers"];
               this.isFavorite = f["IsFavourite"];
-              loading.dismiss();
+              this.isMyQuestion = (f["OwnUserId"] == this.userId);
             }, error => {
+              // this.rest.dissmissLoading(loading);
               this.errorMessage = <any>error;
             }
           )

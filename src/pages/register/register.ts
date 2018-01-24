@@ -58,11 +58,11 @@ export class RegisterPage extends BaseUI {
         .subscribe(
           f => {
             if (f["Status"] == "OK") {
-              loading.dismiss();
+              // loading.dismiss();
               super.showToast(this.toastCtrl, "注册成功啦!");
               this.dismiss();
             } else {
-              loading.dismiss();
+              // loading.dismiss();
               super.showToast(this.toastCtrl, f["StatusContent"]);
             }
           },

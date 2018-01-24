@@ -52,13 +52,13 @@ export class QuestionPage extends BaseUI {
             .subscribe(
               f => {
                 if (f["Status"] == "OK") {
-                  loading.dismiss();
+                  // loading.dismiss();
                   super.showToast(this.toastCtrl, "发表成功");
                   setTimeout(() => {
                     this.dismiss();
                   }, 500);
                 } else {
-                  loading.dismiss();
+                  // loading.dismiss();
                   super.showToast(this.toastCtrl, f["StatusContent"]);
                 }
               },

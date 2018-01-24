@@ -26,6 +26,8 @@ import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
 import {FilePath} from "@ionic-native/file-path";
 import {QuestionPage} from "../pages/question/question";
 import {DetailsPage} from "../pages/details/details";
+import {AnswerPage} from "../pages/answer/answer";
+import {ChatDetailPage} from "../pages/chat-detail/chat-detail";
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import {DetailsPage} from "../pages/details/details";
     UserPage,
     HeadfacePage,
     QuestionPage,
-    DetailsPage
+    DetailsPage,
+    AnswerPage,
+    ChatDetailPage
   ],
   imports: [
     HttpModule,//全局需要导入http
@@ -65,7 +69,9 @@ import {DetailsPage} from "../pages/details/details";
     UserPage,
     HeadfacePage,
     QuestionPage,
-    DetailsPage
+    DetailsPage,
+    AnswerPage,
+    ChatDetailPage
   ],
   providers: [
     StatusBar,

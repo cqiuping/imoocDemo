@@ -13,6 +13,15 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-list>
+    <ion-item [navPush]="ChatDetailPage" [navParams]="userinfo">
+      <ion-avatar item-left>
+        <img src="">
+      </ion-avatar>
+      <h2>Vivien</h2>
+      <p>聊天功能</p>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

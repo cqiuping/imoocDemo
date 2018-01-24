@@ -51,11 +51,11 @@ export class UserPage extends BaseUI {
           .subscribe(
             f => {
               if (f["Status"] == "OK") {
-                loading.dismiss();
+                // loading.dismiss();
                 super.showToast(this.toastCtrl, "用户名更新成功");
 
               }else{
-                loading.dismiss();
+                // loading.dismiss();
                 super.showToast(this.toastCtrl,f["StatusContent"]);
               }
             },
@@ -84,7 +84,7 @@ export class UserPage extends BaseUI {
          this.rest.getUserInfo(val)
          .subscribe(
            userInfo => {
-             loading.dismiss();
+             // loading.dismiss();
              this.userInfo = userInfo;
              this.headface = userInfo["UserHeadface"] + (new Date()).valueOf();
              this.nickName = userInfo["UserNickName"];

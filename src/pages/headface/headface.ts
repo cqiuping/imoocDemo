@@ -7,8 +7,8 @@ import {BaseUI} from "../../common/baseui";
 import {Storage} from "@ionic/storage";
 import {Camera} from "@ionic-native/camera";
 import {File} from "@ionic-native/file";
-import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
 import {FilePath} from "@ionic-native/file-path";
+import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
 
 declare var cordova;//导入第三方库，导入ts中
 
@@ -66,15 +66,15 @@ export class HeadfacePage extends BaseUI {
     this.camera.getPicture(options).then((imagePath) => {
       //特别处理android文件路径问题
       if (this.platform.is('android') && sourceType == this.camera.PictureSourceType.PHOTOLIBRARY) {
-          this.filePath.resolveNativePath(imagePath).then(
-            (filePath) =>{
-              console.log(filePath);
-              console.log("imagePath:" + imagePath);
-              let correctPath = filePath.substr(0,filePath.lastIndexOf('/') + 1);
-              let currentName = imagePath.substr(imagePath.lastIndexOf("/") + 1, imagePath.lastIndexOf("?"));
-              this.copyFileToLocalDir(correctPath,currentName,this.createFileName());
-            }
-          )
+        this.filePath.resolveNativePath(imagePath).then(
+          (filePath) =>{
+            alert("filePath:" + filePath);
+            alert("imagePath:" + imagePath);
+            let correctPath = filePath.substr(0,filePath.lastIndexOf('/') + 1);
+            let currentName = imagePath.substr(imagePath.lastIndexOf("/") + 1, imagePath.lastIndexOf("?"));
+            this.copyFileToLocalDir(correctPath,currentName,this.createFileName());
+          }
+        )
       }else{
         let correctPath = imagePath.substr(0,imagePath.lastIndexOf('/') + 1);
         let currentName = imagePath.substr(imagePath.lastIndexOf("/") + 1);
@@ -93,11 +93,13 @@ export class HeadfacePage extends BaseUI {
    * @param newFileName
    */
   private copyFileToLocalDir(filePath, currentName, newFileName){
+    alert("filePath:"+ filePath);
+    alert("currentName:" + currentName);
     this.file.copyFile(filePath, currentName,cordova.file.DataDirectory,newFileName).then(
       isSuccess =>{
         this.lastPicture = newFileName;
       },error => {
-        console.log("errorMessage:" + error.message);
+        alert("errorMessage:" + error.message);
         super.showToast(this.toastCtrl,"存储图片到本地图库错误");
       });
   }
@@ -141,13 +143,13 @@ export class HeadfacePage extends BaseUI {
     loading.present().then(() =>{
       //开始正式上传
       fileTransfer.upload(targetPath,url,options).then(data =>{
-           loading.dismiss();
-           super.showToast(this.toastCtrl,"图片上传成功");
-           setTimeout(()=>{
-             this.viewCtrl.dismiss();
-           },3000);
+        // loading.dismiss();
+        super.showToast(this.toastCtrl,"图片上传成功");
+        setTimeout(()=>{
+          this.viewCtrl.dismiss();
+        },3000);
       },err=>{
-        loading.dismiss();
+        // loading.dismiss();
         super.showToast(this.toastCtrl,"图片上传发生错误，请重试");
       })
     })
